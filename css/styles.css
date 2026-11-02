@@ -262,3 +262,11 @@ input:focus, select:focus { outline: none; border-color: var(--green); }
 @media (max-width: 560px) {
   .masthead.cover .wrap { min-height: 200px; padding-top: 64px; }
 }
+
+/* Etiqueta de turno fijo */
+.tag {
+  display: inline-block; margin-left: 8px; vertical-align: 2px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .04em;
+  color: var(--green); background: var(--green-soft);
+  padding: 1px 8px; border-radius: 99px;
+}

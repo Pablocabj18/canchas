@@ -3,10 +3,14 @@
 Sistema de reservas para complejos de pádel, fútbol 5, tenis, etc. El cliente elige deporte, día, cancha y horario; el dueño ve las reservas, carga las que le piden por teléfono y configura canchas, precios y horarios.
 
 - `index.html`: página pública de reservas (el link que se comparte).
-- `admin.html`: panel del complejo (reservas, carga manual, canchas, precios y horarios).
+- `admin.html`: panel del complejo (reservas, carga manual, turnos fijos, canchas, precios y horarios).
 - `supabase/schema.sql`: base de datos.
 
 Funciona en GitHub Pages y la base de datos es **gratis** con el plan free de Supabase.
+
+## Turnos fijos
+
+En el panel, pestaña **Turnos fijos**, se cargan los grupos que juegan siempre el mismo día y hora (ej: todos los lunes a las 21:30 en Pádel 1). Ese horario queda ocupado todas las semanas. Si una semana no vienen, en **Reservas** se toca **Liberar este día** y queda libre sólo esa fecha.
 
 ## Modo demo
 
@@ -28,6 +32,5 @@ Repositorio → **Settings → Pages → Deploy from a branch → `main` / root*
 ## Próximos pasos posibles
 
 - Seña online con Mercado Pago para confirmar la reserva.
-- Turnos fijos semanales (el mismo grupo todos los martes a las 21).
 - Precios distintos según horario (más caro después de las 18).
 - Bloquear canchas por mantenimiento o torneos.
