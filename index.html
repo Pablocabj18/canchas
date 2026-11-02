@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservá tu cancha</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1 id="biz-name">Reservá tu cancha</h1>
+      <p id="biz-address"></p>
+    </header>
+
+    <div id="demo-banner" class="banner" hidden>
+      <strong>Modo demo:</strong> las reservas se guardan sólo en este navegador.
+      <a href="admin.html">Abrir el panel del complejo</a>
+    </div>
+
+    <div id="flow">
+      <section class="card">
+        <h2><span class="step-num">1</span> ¿Qué querés jugar?</h2>
+        <div id="sports" class="options services"></div>
+      </section>
+
+      <section class="card" id="step-day" hidden>
+        <h2><span class="step-num">2</span> Elegí el día</h2>
+        <div class="cal">
+          <div class="cal-head">
+            <button class="btn ghost sm" type="button" id="prev-month" aria-label="Mes anterior">‹</button>
+            <strong id="month-label" aria-live="polite"></strong>
+            <button class="btn ghost sm" type="button" id="next-month" aria-label="Mes siguiente">›</button>
+          </div>
+          <div class="cal-grid cal-dow" aria-hidden="true">
+            <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+          </div>
+          <div id="days" class="cal-grid"></div>
+        </div>
+      </section>
+
+      <section class="card" id="step-time" hidden>
+        <h2><span class="step-num">3</span> Elegí cancha y horario</h2>
+        <div id="courts"></div>
+      </section>
+
+      <section class="card" id="step-form" hidden>
+        <h2><span class="step-num">4</span> Tus datos</h2>
+        <p id="summary" class="muted small"></p>
+        <form id="booking-form" novalidate>
+          <div class="field">
+            <label for="name">Nombre y apellido</label>
+            <input id="name" type="text" autocomplete="name" maxlength="80" required>
+          </div>
+          <div class="field">
+            <label for="phone">WhatsApp</label>
+            <input id="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Ej: 11 2233 4455" required>
+          </div>
+          <button class="btn block" type="submit" id="submit">Confirmar reserva</button>
+          <p id="form-error" class="error" hidden></p>
+        </form>
+      </section>
+    </div>
+
+    <section id="done" class="card success" hidden>
+      <div class="check" aria-hidden="true">✓</div>
+      <h2>¡Cancha reservada!</h2>
+      <p id="done-text"></p>
+      <div class="actions">
+        <a id="done-wa" class="btn" target="_blank" rel="noopener" hidden>Avisar por WhatsApp</a>
+        <button class="btn ghost" type="button" id="again">Hacer otra reserva</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>
