@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <title>Panel del complejo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <header class="hero hero-sm">
+    <div class="wrap hero-row">
+      <div>
+        <span class="eyebrow">Panel del complejo</span>
+        <h1 id="title">Panel</h1>
+        <p id="mode"></p>
+      </div>
+      <button class="btn ghost-light sm" id="logout" type="button" hidden>Salir</button>
+    </div>
+  </header>
+
   <main class="wrap">
     <section id="login" class="card" hidden>
       <h2>Ingresar al panel</h2>
@@ -26,14 +40,6 @@
     </section>
 
     <div id="app" hidden>
-      <div class="toolbar">
-        <div>
-          <h1 style="margin:0;font-size:1.5rem" id="title">Panel</h1>
-          <span class="muted small" id="mode"></span>
-        </div>
-        <button class="btn ghost sm" id="logout" type="button" hidden>Salir</button>
-      </div>
-
       <section class="card">
         <label for="public-link">Link para tus clientes</label>
         <div class="linkbox">

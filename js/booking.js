@@ -33,6 +33,16 @@
     state.busy = await S.getBusy(days[0], days[days.length - 1]);
   }
 
+  function sportIcon(sport) {
+    const s = sport.toLowerCase();
+    if (/p[aá]del|tenis|squash/.test(s)) return "🎾";
+    if (/f[uú]tbol|futsal/.test(s)) return "⚽";
+    if (/b[aá]squet|basket/.test(s)) return "🏀";
+    if (/v[oó]ley/.test(s)) return "🏐";
+    if (/hockey/.test(s)) return "🏑";
+    return "🏟️";
+  }
+
   function renderSports() {
     const box = $("#sports");
     const sports = [...new Set(state.settings.courts.map((c) => c.sport))];
@@ -44,7 +54,7 @@
       const courts = state.settings.courts.filter((c) => c.sport === sport);
       const prices = courts.map((c) => Number(c.price)).filter((p) => p > 0);
       const btn = el("button", {
-        class: "opt", type: "button", "aria-pressed": "false",
+        class: "opt sport", type: "button", "aria-pressed": "false",
         onclick: () => {
           state.sport = sport;
           state.day = state.court = state.time = null;
@@ -58,6 +68,7 @@
           $("#step-day").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       },
+        el("span", { class: "icon", "aria-hidden": "true" }, sportIcon(sport)),
         el("strong", {}, sport),
         el("span", { class: "meta" },
           courts.length + (courts.length === 1 ? " cancha" : " canchas") +
@@ -120,7 +131,7 @@
       el("div", { class: "court" },
         el("div", { class: "court-head" },
           el("strong", {}, court.name),
-          el("span", { class: "muted small" }, court.duration + " min" + (court.price ? " · " + U.money(court.price) : ""))
+          el("span", { class: "price" }, court.duration + " min" + (court.price ? " · " + U.money(court.price) : ""))
         ),
         times.length
           ? el("div", { class: "options times" }, times.map((t) => el("button", {
