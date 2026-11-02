@@ -6,15 +6,19 @@
   <title>Reservá tu cancha</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="hero">
+  <header class="masthead">
     <div class="wrap">
-      <span class="eyebrow">Reservas online</span>
-      <h1 id="biz-name">Reservá tu cancha</h1>
-      <p id="biz-address"></p>
+      <div>
+        <span class="kicker">Reserva de canchas</span>
+        <h1 id="biz-name">Reservá tu cancha</h1>
+      </div>
+      <div class="side">
+        <p id="biz-address"></p>
+      </div>
     </div>
   </header>
 
@@ -27,12 +31,12 @@
 
     <div id="flow">
       <section class="card">
-        <h2><span class="step-num">1</span> ¿Qué querés jugar?</h2>
+        <h2><span class="step-num">01</span> ¿Qué querés jugar?</h2>
         <div id="sports" class="options services"></div>
       </section>
 
       <section class="card" id="step-day" hidden>
-        <h2><span class="step-num">2</span> Elegí el día</h2>
+        <h2><span class="step-num">02</span> Elegí el día</h2>
         <div class="cal">
           <div class="cal-head">
             <button class="btn ghost sm" type="button" id="prev-month" aria-label="Mes anterior">‹</button>
@@ -47,12 +51,12 @@
       </section>
 
       <section class="card" id="step-time" hidden>
-        <h2><span class="step-num">3</span> Elegí cancha y horario</h2>
+        <h2><span class="step-num">03</span> Elegí cancha y horario</h2>
         <div id="courts"></div>
       </section>
 
       <section class="card" id="step-form" hidden>
-        <h2><span class="step-num">4</span> Tus datos</h2>
+        <h2><span class="step-num">04</span> Tus datos</h2>
         <p id="summary" class="muted small"></p>
         <form id="booking-form" novalidate>
           <div class="field">

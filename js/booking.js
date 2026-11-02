@@ -33,16 +33,6 @@
     state.busy = await S.getBusy(days[0], days[days.length - 1]);
   }
 
-  function sportIcon(sport) {
-    const s = sport.toLowerCase();
-    if (/p[aá]del|tenis|squash/.test(s)) return "🎾";
-    if (/f[uú]tbol|futsal/.test(s)) return "⚽";
-    if (/b[aá]squet|basket/.test(s)) return "🏀";
-    if (/v[oó]ley/.test(s)) return "🏐";
-    if (/hockey/.test(s)) return "🏑";
-    return "🏟️";
-  }
-
   function renderSports() {
     const box = $("#sports");
     const sports = [...new Set(state.settings.courts.map((c) => c.sport))];
@@ -68,7 +58,6 @@
           $("#step-day").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       },
-        el("span", { class: "icon", "aria-hidden": "true" }, sportIcon(sport)),
         el("strong", {}, sport),
         el("span", { class: "meta" },
           courts.length + (courts.length === 1 ? " cancha" : " canchas") +
@@ -126,31 +115,56 @@
 
   function renderCourts() {
     const box = $("#courts");
-    const groups = freeByCourt(state.day, new Date());
-    box.replaceChildren(...groups.map(({ court, times }) =>
-      el("div", { class: "court" },
-        el("div", { class: "court-head" },
-          el("strong", {}, court.name),
-          el("span", { class: "price" }, court.duration + " min" + (court.price ? " · " + U.money(court.price) : ""))
-        ),
-        times.length
-          ? el("div", { class: "options times" }, times.map((t) => el("button", {
-            class: "opt time", type: "button", "aria-pressed": "false",
-            onclick: (e) => {
-              state.court = court;
-              state.time = t;
-              setPressed(box, e.currentTarget);
-              const end = U.fromMin(U.toMin(t) + Number(court.duration));
-              $("#summary").textContent = court.name + " · " + U.formatDayLong(state.day) + " de " + t + " a " + end + " hs" +
-                (court.price ? " · " + U.money(court.price) : "");
-              $("#step-form").hidden = false;
-              $("#step-form").scrollIntoView({ behavior: "smooth", block: "nearest" });
-              $("#name").focus({ preventScroll: true });
-            }
-          }, t)))
-          : el("p", { class: "empty" }, "Sin horarios libres.")
-      )
-    ));
+    const now = new Date();
+    const courts = sportCourts();
+    // Todos los turnos posibles de cada cancha (sin mirar ocupados) y los que siguen libres.
+    const grid = courts.map((court) => ({
+      court,
+      all: new Set(U.availableSlots(state.settings, state.day, court, [], now)),
+      free: new Set(U.availableSlots(state.settings, state.day, court, state.busy, now))
+    }));
+    const times = [...new Set(grid.flatMap((g) => [...g.all]))].sort();
+
+    if (!times.length) {
+      box.replaceChildren(el("p", { class: "empty" }, "No quedan horarios este día."));
+      return;
+    }
+
+    const pick = (court, t, btn) => {
+      state.court = court;
+      state.time = t;
+      setPressed(box, btn);
+      const end = U.fromMin(U.toMin(t) + Number(court.duration));
+      $("#summary").textContent = court.name + " · " + U.formatDayLong(state.day) + " de " + t + " a " + end + " hs" +
+        (court.price ? " · " + U.money(court.price) : "");
+      $("#step-form").hidden = false;
+      $("#step-form").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      $("#name").focus({ preventScroll: true });
+    };
+
+    const head = [
+      el("span", { class: "tt-head" }),
+      ...courts.map((c) => el("div", { class: "tt-head" },
+        el("strong", {}, c.name),
+        el("span", {}, c.duration + " min" + (c.price ? " · " + U.money(c.price) : ""))
+      ))
+    ];
+    const rows = times.flatMap((t) => [
+      el("span", { class: "tt-time" }, t),
+      ...grid.map(({ court, all, free }) => {
+        if (!all.has(t)) return el("span", { class: "slot none", "aria-hidden": "true" });
+        if (!free.has(t)) return el("span", { class: "slot taken" }, "Ocupado");
+        const btn = el("button", {
+          class: "opt slot free", type: "button", "aria-pressed": "false",
+          "aria-label": court.name + " a las " + t,
+          onclick: () => pick(court, t, btn)
+        }, "Libre");
+        return btn;
+      })
+    ]);
+
+    box.replaceChildren(el("div", { class: "tt-scroll" },
+      el("div", { class: "timetable", style: "--cols:" + courts.length }, head, rows)));
   }
 
   function showError(msg) {
