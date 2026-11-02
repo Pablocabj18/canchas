@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="stripes" width="170" height="600" patternUnits="userSpaceOnUse">
+      <rect width="85" height="600" fill="#17603a"/>
+      <rect x="85" width="85" height="600" fill="#135331"/>
+    </pattern>
+    <radialGradient id="light" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fffbe6" stop-opacity=".55"/>
+      <stop offset=".35" stop-color="#fffbe6" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#fffbe6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.45" r="0.75">
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".55"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Césped cortado en franjas -->
+  <rect width="1600" height="600" fill="url(#stripes)"/>
+
+  <!-- Líneas de la cancha -->
+  <g fill="none" stroke="#f4f7f2" stroke-opacity=".85" stroke-width="4">
+    <rect x="120" y="60" width="1360" height="480"/>
+    <line x1="800" y1="60" x2="800" y2="540"/>
+    <circle cx="800" cy="300" r="80"/>
+    <rect x="120" y="150" width="230" height="300"/>
+    <rect x="120" y="230" width="80" height="140"/>
+    <path d="M350 272.2 A80 80 0 0 1 350 327.8"/>
+    <rect x="1250" y="150" width="230" height="300"/>
+    <rect x="1400" y="230" width="80" height="140"/>
+    <path d="M1250 272.2 A80 80 0 0 0 1250 327.8"/>
+    <path d="M120 80 A20 20 0 0 0 140 60"/>
+    <path d="M1460 60 A20 20 0 0 0 1480 80"/>
+    <path d="M140 540 A20 20 0 0 0 120 520"/>
+    <path d="M1480 520 A20 20 0 0 0 1460 540"/>
+    <rect x="96" y="268" width="24" height="64"/>
+    <rect x="1480" y="268" width="24" height="64"/>
+  </g>
+  <g fill="#f4f7f2" fill-opacity=".9">
+    <circle cx="800" cy="300" r="6"/>
+    <circle cx="275" cy="300" r="5"/>
+    <circle cx="1325" cy="300" r="5"/>
+  </g>
+
+  <!-- Luces del estadio -->
+  <ellipse cx="60" cy="20" rx="520" ry="360" fill="url(#light)"/>
+  <ellipse cx="1540" cy="20" rx="520" ry="360" fill="url(#light)"/>
+  <ellipse cx="800" cy="640" rx="700" ry="260" fill="url(#light)" opacity=".5"/>
+
+  <rect width="1600" height="600" fill="url(#vignette)"/>
+</svg>

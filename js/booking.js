@@ -58,10 +58,13 @@
           $("#step-day").scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
       },
-        el("strong", {}, sport),
-        el("span", { class: "meta" },
-          courts.length + (courts.length === 1 ? " cancha" : " canchas") +
-          (prices.length ? " · desde " + U.money(Math.min(...prices)) : ""))
+        el("span", { class: "sport-img", style: "background-image:url(" + U.sportImage(sport) + ")", "aria-hidden": "true" }),
+        el("span", { class: "sport-body" },
+          el("strong", {}, sport),
+          el("span", { class: "meta" },
+            courts.length + (courts.length === 1 ? " cancha" : " canchas") +
+            (prices.length ? " · desde " + U.money(Math.min(...prices)) : ""))
+        )
       );
       return btn;
     }));
@@ -238,6 +241,11 @@
     state.settings = await S.getSettings();
     $("#biz-name").textContent = state.settings.businessName;
     $("#biz-address").textContent = state.settings.address || "Reservá tu cancha online";
+    const cover = U.safeImageUrl(state.settings.coverUrl);
+    if (cover) {
+      $(".masthead").style.backgroundImage =
+        "linear-gradient(180deg, rgba(6, 14, 9, .25), rgba(6, 14, 9, .8)), url(\"" + cover + "\")";
+    }
     document.title = "Reservas · " + state.settings.businessName;
     $("#demo-banner").hidden = S.isRemote;
     await loadBusy();

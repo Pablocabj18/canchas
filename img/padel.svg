@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Entorno -->
+  <rect width="240" height="120" fill="#1b2733"/>
+  <!-- Paredes de vidrio -->
+  <rect x="16" y="8" width="208" height="104" rx="2" fill="#9fd4ea" fill-opacity=".12" stroke="#a9dcf0" stroke-opacity=".6" stroke-width="2"/>
+  <!-- Superficie de la cancha (20 x 10 m) -->
+  <rect x="20" y="12" width="200" height="96" fill="#2f73b4"/>
+  <g stroke="#ffffff" stroke-width="1.6" fill="none">
+    <rect x="20" y="12" width="200" height="96"/>
+    <!-- Líneas de saque a 6,95 m de la red -->
+    <line x1="50.5" y1="12" x2="50.5" y2="108"/>
+    <line x1="189.5" y1="12" x2="189.5" y2="108"/>
+    <!-- Línea central -->
+    <line x1="50.5" y1="60" x2="189.5" y2="60"/>
+  </g>
+  <!-- Red -->
+  <line x1="120" y1="9" x2="120" y2="111" stroke="#e9eef3" stroke-width="3"/>
+  <line x1="120" y1="9" x2="120" y2="111" stroke="#1b2733" stroke-width="1" stroke-dasharray="2 2"/>
+  <!-- Pelota -->
+  <circle cx="158" cy="44" r="3.2" fill="#d9f24a"/>
+  <!-- Reflectores -->
+  <circle cx="16" cy="8" r="34" fill="url(#glow)"/>
+  <circle cx="224" cy="8" r="34" fill="url(#glow)"/>
+  <circle cx="16" cy="112" r="34" fill="url(#glow)"/>
+  <circle cx="224" cy="112" r="34" fill="url(#glow)"/>
+</svg>

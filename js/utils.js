@@ -105,8 +105,20 @@
     return out;
   }
 
+  // Ilustración según el deporte.
+  function sportImage(sport) {
+    return /p[aá]del|tenis|squash/i.test(sport) ? "img/padel.svg" : "img/futbol.svg";
+  }
+
+  // Sólo links http(s) o archivos del propio sitio, sin caracteres que rompan el CSS.
+  function safeImageUrl(url) {
+    const u = String(url || "").trim();
+    if (!u || /["'()\\\s<>]/.test(u)) return "";
+    return /^(https?:\/\/|img\/)/i.test(u) ? u : "";
+  }
+
   window.Utils = {
     pad, toMin, fromMin, dateKey, parseDay, addDays, formatDayLong, monthLabel, money,
-    normPhone, waLink, el, availableSlots, DAY_NAMES, DAY_SHORT, MONTHS
+    normPhone, waLink, el, availableSlots, sportImage, safeImageUrl, DAY_NAMES, DAY_SHORT, MONTHS
   };
 })();

@@ -190,6 +190,7 @@
     $("#s-wa").value = settings.whatsapp || "";
     $("#s-cc").value = settings.countryCode || "";
     $("#s-days").value = String(settings.daysAhead);
+    $("#s-cover").value = settings.coverUrl || "";
     renderHours();
     $("#courts-edit").replaceChildren(...settings.courts.map(courtRow));
   }
@@ -233,12 +234,17 @@
     const name = $("#s-name").value.trim();
     if (!name) throw new Error("Poné el nombre de tu complejo.");
 
+    const coverRaw = $("#s-cover").value.trim();
+    const cover = U.safeImageUrl(coverRaw);
+    if (coverRaw && !cover) throw new Error("El link de la foto tiene que empezar con https:// y no puede tener espacios.");
+
     return {
       businessName: name,
       address: $("#s-address").value.trim(),
       whatsapp: $("#s-wa").value.replace(/\D/g, ""),
       countryCode: $("#s-cc").value.replace(/\D/g, ""),
       daysAhead: Math.min(60, Math.max(1, Number($("#s-days").value) || 14)),
+      coverUrl: cover,
       courts,
       hours
     };
